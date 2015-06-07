@@ -61,5 +61,9 @@ case class Dictionary() extends CustomPage with DefaultHeader {
 
   def ready(route: InstantiatedRoute) {
     headword := route.args.getOrElse("word", "")
+
+    Application.preload.foreach { response =>
+      println(s"Preloaded data: $response")
+    }
   }
 }

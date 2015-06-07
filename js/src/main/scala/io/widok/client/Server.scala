@@ -43,6 +43,8 @@ object ServerOps {
   import Picklers._
 
   object Dictionary {
+    def timeout(ms: Int) = Server[Protocol].dictionary.timeout(ms).call()
+
     def lookUp(headword: String) =
       Server[Protocol].dictionary.lookUp(headword).call()
   }

@@ -12,4 +12,6 @@ object Routes {
   )
 }
 
-object Application extends RoutingApplication(Routes.routes, Routes.notFound)
+object Application extends RoutingApplication(Routes.routes, Routes.notFound) {
+  val preload = ServerOps.Dictionary.timeout(5000)
+}
