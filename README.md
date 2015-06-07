@@ -36,4 +36,4 @@ sbt ~reStart
 ```
 
 ## See also
-* [https://www.typesafe.com/activator/template/widok-skeleton](Typesafe activator)
+* [Typesafe activator](https://www.typesafe.com/activator/template/widok-skeleton)
