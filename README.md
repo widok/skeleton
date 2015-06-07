@@ -34,3 +34,6 @@ Compile to JavaScript and start server:
 ```bash
 sbt ~reStart
 ```
+
+## See also
+* [https://www.typesafe.com/activator/template/widok-skeleton](Typesafe activator)
