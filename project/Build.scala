@@ -2,6 +2,7 @@ import sbt._
 import sbt.Keys._
 import org.scalajs.sbtplugin.ScalaJSPlugin.autoImport._
 import org.scalajs.sbtplugin.cross.CrossProject
+import org.scalajs.core.tools.sem._
 import spray.revolver.RevolverPlugin._
 import com.typesafe.sbt.web.SbtWeb
 import com.typesafe.sbt.web.Import._
@@ -23,6 +24,11 @@ object Build extends sbt.Build {
       println("[info] Compiling in development mode")
       fastOptJS
     }
+  val semantics: Semantics => Semantics =
+    if (!deploy) identity[Semantics]
+    else _
+      .withRuntimeClassName(_ => "")
+      .withAsInstanceOfs(CheckedBehavior.Unchecked)
 
   val copyFontsTask = {
     val webJars = WebKeys.webJarsDirectory in Assets
@@ -86,6 +92,7 @@ object Build extends sbt.Build {
     , artifactPath in (Compile, optLevel) := jsPath / "application.js"
     , resourceManaged in sass in Assets := cssPath
     , sourceGenerators in Assets <+= copyFontsTask
+    , scalaJSSemantics ~= semantics
     )
 
   lazy val js = crossProject.js
