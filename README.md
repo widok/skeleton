@@ -1,13 +1,4 @@
 # Widok skeleton
-Install prerequisites:
-
-```bash
-git clone https://github.com/widok/widok.git
-cd widok
-sbt publish-local
-cd ..
-```
-
 Clone repository:
 
 ```bash
