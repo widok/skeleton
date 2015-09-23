@@ -7,6 +7,7 @@ import org.widok.html._
 
 import io.widok.client._
 import io.widok.common.Response
+import pl.metastack.metarx.Var
 
 import scalajs.concurrent.JSExecutionContext.Implicits.runNow
 
@@ -28,40 +29,42 @@ case class Dictionary() extends CustomPage with DefaultHeader {
 
   val iptText = Input.Text()
 
-  def body() = Inline(
-    Panel(
-      Panel.Heading("Dictionary")
-
-    , Panel.Body(
-        Alert(b("[Info]"), " Please enter headword!")
-          .style(Style.Info)
-          .show(initial)
-
-      , result.map(raw)
-      )
-
-    , Panel.Footer(
-        InputGroup(
-          iptText
-            .placeholder("Look up word….")
-            .size(Size.Small)
-            .bindEnter(headword)
-            .autofocus(true)
-
-        , span(
-            Button(fa.Send(), " Send")
-              .style(Style.Primary)
-              .size(Size.Small)
-              .onClick(_ => iptText.enterValue.produce())
-          ).css("input-group-btn")
-        )
-      )
-    ).style(Style.Default)
-  )
-
-  def ready(route: InstantiatedRoute) {
+  def body(route: InstantiatedRoute) = {
     headword := route.args.getOrElse("word", "")
 
+    Inline(
+      Panel(
+        Panel.Heading("Dictionary")
+
+        , Panel.Body(
+          Alert(b("[Info]"), " Please enter headword!")
+            .style(Style.Info)
+            .show(initial)
+
+          , result.map(raw)
+        )
+
+        , Panel.Footer(
+          InputGroup(
+            iptText
+              .placeholder("Look up word….")
+              .size(Size.Small)
+              .bindEnter(headword)
+              .autofocus(true)
+
+            , span(
+              Button(fa.Send(), " Send")
+                .style(Style.Primary)
+                .size(Size.Small)
+                .onClick(_ => iptText.enterValue.produce())
+            ).css("input-group-btn")
+          )
+        )
+      ).style(Style.Default)
+    )
+  }
+
+  def ready() {
     Application.preload.foreach { response =>
       println(s"Preloaded data: $response")
     }

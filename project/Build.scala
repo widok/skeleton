@@ -54,7 +54,7 @@ object Build extends sbt.Build {
       name := "skeleton",
       version := "0.1-SNAPSHOT",
       organization := "io.widok",
-      scalaVersion := "2.11.6",
+      scalaVersion := "2.11.7",
       scalacOptions := Seq(
         "-unchecked"
       , "-deprecation"
@@ -79,7 +79,7 @@ object Build extends sbt.Build {
     )
     .jsSettings(
       libraryDependencies ++= Seq(
-        "io.github.widok" %%% "widok" % "0.2.2" withSources() withJavadoc(),
+        "io.github.widok" %%% "widok" % "0.2.3" withSources() withJavadoc(),
         "com.lihaoyi" %%% "upickle" % "0.2.8",
         "com.lihaoyi" %%% "autowire" % "0.2.5",
         "org.webjars" % "bootstrap-sass" % "3.3.1",

@@ -6,9 +6,9 @@ import io.widok.client._
 
 case class NotFound() extends CustomPage with DefaultHeader {
   def title() = "Not found"
-  def body() = "The page you were looking for could not be found."
+  def body(route: InstantiatedRoute) = "The page you were looking for could not be found."
 
-  def ready(route: InstantiatedRoute) {
+  def ready() {
 
   }
 }
